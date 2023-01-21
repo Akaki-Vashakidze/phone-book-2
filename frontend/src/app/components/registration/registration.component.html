@@ -1,0 +1,73 @@
+<div class="container">
+    <form class="form" [formGroup]="userInfo" >
+  
+      <div class="form-fields">
+        <mat-form-field appearance="fill">
+          <mat-label>first name</mat-label>
+          <input formControlName="firstName" matInput placeholder="">
+          <mat-hint style="color:red;" *ngIf="userInfo.get('firstName')?.touched  && userInfo.get('firstName')?.errors?.['required']">
+            First Name is required
+          </mat-hint> 
+        </mat-form-field>
+      </div>
+      <div class="form-fields">
+        <mat-form-field appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input formControlName="lastName" matInput placeholder="">
+          <mat-hint style="color:red;" *ngIf="userInfo.get('lastName')?.touched  && userInfo.get('lastName')?.errors?.['required']">
+            Last Name is required
+          </mat-hint> 
+        </mat-form-field>
+      </div>
+      <div class="form-fields">
+        <mat-form-field appearance="fill">
+          <mat-label>Mobile Number</mat-label>
+          <input formControlName="mobile" matInput placeholder="">
+          <mat-hint style="color:red;" *ngIf="userInfo.get('mobile')?.touched  && userInfo.get('mobile')?.errors?.['required']">
+            Mobile number is required
+          </mat-hint> 
+        </mat-form-field>
+      </div>
+      <div class="form-fields">
+        <mat-form-field appearance="fill">
+          <mat-label>email:</mat-label>
+          <input formControlName="email" matInput placeholder="">
+          <mat-hint style="color:red;" *ngIf="userInfo.get('email')?.touched  && userInfo.get('email')?.errors?.['required']">
+            Email is required
+          </mat-hint> 
+        </mat-form-field>
+      </div>
+     
+      <div class="form-fields">
+        <mat-form-field appearance="fill">
+          <mat-label>Password:</mat-label>
+          <input type="password" formControlName="password1" matInput placeholder="">
+          <mat-hint style="color:red;" *ngIf="userInfo.get('password1')?.touched  && userInfo.get('password1')?.errors?.['required']">
+            Password is required
+          </mat-hint> 
+        </mat-form-field>
+      </div>
+      <div class="form-fields">
+        <mat-form-field appearance="fill">
+          <mat-label>Repeat Password:</mat-label>
+          <input type="password" formControlName="password2" matInput placeholder="">
+          <mat-hint style="color:red;" *ngIf="userInfo.get('password2')?.touched  && userInfo.get('password2')?.errors?.['required']">
+            Password is required
+          </mat-hint> 
+        </mat-form-field>
+      </div>
+      <div class="form-fields">
+        <label>Gender: </label>
+        <mat-radio-group  formControlName="gender">
+          <mat-radio-button value="male">Male</mat-radio-button>
+          <mat-radio-button value="female">Female</mat-radio-button>
+          <mat-hint style="color:red;" *ngIf="userInfo.get('gender')?.touched  && userInfo.get('gender')?.errors?.['required']">
+            Gender is required
+          </mat-hint> 
+        </mat-radio-group>
+      </div>
+      <div class="form-button" >
+        <button mat-raised-button (click)="saveInfo()">Register</button>
+      </div>
+    </form>
+  </div>

@@ -1,0 +1,9 @@
+<mat-toolbar color="primary" class="navbar">
+    <div><span routerLink="">Phone Book</span></div>
+    <div>
+        <span routerLink="">Home</span>
+        <span *ngIf="!userIsLogged" routerLink="/login">Log In</span>
+        <span *ngIf="!userIsLogged" routerLink="/registration">Register</span>
+        <span *ngIf="userIsLogged" (click)="logOut()" routerLink="" >Log Out</span>
+    </div>
+</mat-toolbar>

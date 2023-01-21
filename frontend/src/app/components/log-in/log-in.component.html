@@ -1,0 +1,29 @@
+
+<div class="container">
+    <form class="form" [formGroup]="logInInfo" >
+  
+      <div class="form-fields">
+        <mat-form-field appearance="fill">
+          <mat-label>email:</mat-label>
+          <input formControlName="email" matInput placeholder="">
+          <mat-hint style="color:red;" *ngIf="logInInfo.get('email')?.touched  && logInInfo.get('email')?.errors?.['required']">
+            Email is required
+          </mat-hint> 
+        </mat-form-field>
+      </div>
+     
+      <div class="form-fields">
+        <mat-form-field appearance="fill">
+          <mat-label>Password:</mat-label>
+          <input type="password" formControlName="password" matInput placeholder="">
+          <mat-hint style="color:red;" *ngIf="logInInfo.get('password1')?.touched  && logInInfo.get('password1')?.errors?.['required']">
+            Password is required
+          </mat-hint> 
+        </mat-form-field>
+      </div>
+    
+      <div class="form-button" >
+        <button mat-raised-button (click)="logIn()">Log In</button>
+      </div>
+    </form>
+  </div>
