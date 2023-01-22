@@ -1,0 +1,28 @@
+<div class="container">
+    <form class="form" [formGroup]="contactInfo" >
+  
+      <div class="form-fields">
+        <mat-form-field appearance="fill">
+          <mat-label>Name:</mat-label>
+          <input formControlName="name" matInput placeholder="">
+          <mat-hint style="color:red;" *ngIf="contactInfo.get('name')?.touched  && contactInfo.get('name')?.errors?.['required']">
+            Name is required
+          </mat-hint> 
+        </mat-form-field>
+      </div>
+     
+      <div class="form-fields">
+        <mat-form-field appearance="fill">
+          <mat-label>Number:</mat-label>
+          <input formControlName="number" matInput placeholder="">
+          <mat-hint style="color:red;" *ngIf="contactInfo.get('number')?.touched  && contactInfo.get('number')?.errors?.['required']">
+            Number is required
+          </mat-hint> 
+        </mat-form-field>
+      </div>
+    
+      <div class="form-button" >
+        <button mat-raised-button (click)="addContact()">Add Contact</button>
+      </div>
+    </form>
+  </div>

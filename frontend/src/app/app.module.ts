@@ -55,9 +55,11 @@ import {DialogModule} from '@angular/cdk/dialog';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule , HTTP_INTERCEPTORS} from '@angular/common/http';
-import { NumbersTableComponent } from './components/numbers-table/numbers-table.component';
+import { NumbersTableComponent } from './components/contacts/numbers-table/numbers-table.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { ContactsComponent } from './components/contacts/contacts.component';
+import { AddContactComponent } from './components/contacts/add-contact/add-contact.component';
 
 
 @NgModule({
@@ -67,7 +69,9 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     LogInComponent,
     HomeComponent,
     NumbersTableComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    ContactsComponent,
+    AddContactComponent
   ],
   imports: [
     BrowserModule,

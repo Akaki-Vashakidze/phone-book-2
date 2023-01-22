@@ -1,5 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,7 @@ export class AuthService {
   }
 
   userIsLogged = new EventEmitter<boolean>();
+  userEmail = new BehaviorSubject<any>('');
 
   getToken () {
     return localStorage.getItem('token')

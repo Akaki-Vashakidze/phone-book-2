@@ -33,7 +33,8 @@ export class RegistrationComponent {
 
     let userRegistrationInfo = {
       ...this.userInfo.value,
-      password:this.userInfo.value.password1
+      password:this.userInfo.value.password1,
+      contacts:[]
     }
 
     this._authService.registerUser(userRegistrationInfo)

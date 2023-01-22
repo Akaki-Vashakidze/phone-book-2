@@ -18,6 +18,30 @@ router.get('/', (req, res) => {
     res.send('From Api routes')
 })
 
+router.post('/addContact',(req,res) => {
+    let Data = req.body
+    User.findOneAndUpdate ({
+      email:Data.userEmail
+     },{
+       $push:{
+         contacts:Data.newContact
+       }
+     },(err) => (
+       console.log(err)
+     ))
+
+     User.findOne({email:Data.userEmail},(error,user)=>{
+      if(error) {
+        console.log(error)
+      } else {
+        if(user) {
+            //sending chosen user
+            res.status(201).send(user.contacts)
+        }
+      }
+     })
+})
+
 router.post('/register', (req, res) => {
     let userData = req.body
     User.findOne({ email: userData.email }, (error, user) => {
