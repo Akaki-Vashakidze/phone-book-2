@@ -22,4 +22,7 @@ export class AuthService {
 
   userIsLogged = new EventEmitter<boolean>();
 
+  getToken () {
+    return localStorage.getItem('token')
+  }
 }

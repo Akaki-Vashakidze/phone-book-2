@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-toolbar',
@@ -8,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor(private _authService:AuthService) {}
+  constructor(private _authService:AuthService, private _router:Router) {}
  
 
  title = 'frontend';
@@ -23,6 +24,7 @@ export class ToolbarComponent implements OnInit {
 
   logOut(){
    this._authService.userIsLogged.emit(false)
+   this._router.navigate([''])
   }
 
 

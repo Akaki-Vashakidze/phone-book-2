@@ -54,11 +54,11 @@ import {CdkMenuModule} from '@angular/cdk/menu';
 import {DialogModule} from '@angular/cdk/dialog';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { HomeComponent } from './components/home/home.component';
-import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from './services/auth.service';
-import { NumbersComponent } from './components/numbers/numbers.component';
+import { HttpClientModule , HTTP_INTERCEPTORS} from '@angular/common/http';
 import { NumbersTableComponent } from './components/numbers-table/numbers-table.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { TokenInterceptorService } from './services/token-interceptor.service';
+
 
 @NgModule({
   declarations: [
@@ -66,7 +66,6 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     RegistrationComponent,
     LogInComponent,
     HomeComponent,
-    NumbersComponent,
     NumbersTableComponent,
     ToolbarComponent
   ],
@@ -126,7 +125,11 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     ScrollingModule,
     DialogModule
   ],
-  providers: [],
+  providers: [{
+    provide:HTTP_INTERCEPTORS,
+    useClass:TokenInterceptorService,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

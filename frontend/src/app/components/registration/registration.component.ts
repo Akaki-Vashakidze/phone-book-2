@@ -39,12 +39,13 @@ export class RegistrationComponent {
     this._authService.registerUser(userRegistrationInfo)
     .subscribe(
       res => {
-        console.log(res)
         localStorage.setItem('token',res.token)
         this._authService.userIsLogged.emit(true)
         this._router.navigate(['/numbers'])
       },
-      err => console.log(err)
+      err =>{
+         alert('this email is already taken please restore the password')
+        }
     )
   }
 }
