@@ -69,21 +69,19 @@ router.post('/register', (req, res) => {
 
 })
 
-router.get('/numbers', verifyToken, (req, res) => {
-    Data = [
-        { "name": 'Akaki Vashakidze', "number": '01:23.22' },
-        { "name": 'Tsotne Maisuradze', "number": '02:23.22' },
-        { "name": 'Nika Kaulashvili', "number": '04:23.22' },
-        { "name": 'Tsontne Devdariani', "number": '00:53.22' },
-        { "name": 'Mishiko Sanadze', "number": '01:13.22' },
-        { "name": 'Luka Pataraia', "number": '01:25.22' },
-        { "name": 'Nodo Margvelashvili', "number": '01:20.22' },
-        { "name": 'Juder Bitchikashvili', "number": '01:53.22' },
-        { "name": 'Rati Kanashvili', "number": '01:03.22' },
-        { "name": 'Armazi Dugashvili', "number": '01:03.12' },
-        { "name": 'Irakli Revishvili', "number": '01:43.22' },
-    ];
-    res.json(Data)
+router.post('/numbers', verifyToken, (req, res) => {
+    let userData = req.body
+    console.log(req.body)
+    User.findOne({ email: userData.email }, (error, user) => {
+        if (error) {
+            console.log(error)
+        } else {
+            if (user) {
+                console.log(user)
+                res.send(user.contacts)
+            } 
+        }
+    })
 })
 
 router.post('/login', (req, res) => {

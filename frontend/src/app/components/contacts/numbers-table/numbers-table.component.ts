@@ -29,11 +29,32 @@ export class NumbersTableComponent {
   dataSource: any;
 
   constructor(private _numbersService: NumbersService, private _router:Router) {
-    this._numbersService.getNumbers().subscribe(
+    this._numbersService.getNumbers(localStorage.getItem('userEmail')).subscribe(
       item => {
       this.Data = item;
       this.dataSource = new MatTableDataSource(this.Data);
 
+      if(this.dataSource) {
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      }
+    },
+    err => {
+      if(err instanceof HttpErrorResponse) {
+        if (err.status === 401) {
+         this._router.navigate(['/login'])
+        }
+        if(err.status === 500) {
+          alert('Your Session is timed out, please log in again!')
+          this._router.navigate(['/login'])
+        }
+      }
+    }
+    )
+
+    this._numbersService.numbers.subscribe(item => {
+      this.Data = item;
+      this.dataSource = new MatTableDataSource(this.Data);
       if(this.dataSource) {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;

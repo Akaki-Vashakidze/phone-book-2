@@ -12,7 +12,7 @@ export class LogInComponent {
   
 constructor(private _formBuilder: FormBuilder, private _authService:AuthService, private _router:Router) {}
 
-logInInfo = this._formBuilder.group({
+logInInfo : any= this._formBuilder.group({
   email:['',Validators.required],
   password:['',Validators.required]
 })
@@ -22,6 +22,7 @@ logIn() {
   .subscribe(
     res =>  {
       localStorage.setItem('token',res.token);
+      localStorage.setItem('userEmail',this.logInInfo.value.email)
       this._authService.userEmail.next(this.logInInfo.value.email)
       this._authService.userIsLogged.emit(true)
       this._router.navigate(['/numbers'])
