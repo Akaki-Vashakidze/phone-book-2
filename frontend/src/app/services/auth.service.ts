@@ -23,7 +23,6 @@ export class AuthService {
       map(userInfo => {
         localStorage.setItem('token', userInfo.token);
         this.currentUser$.next(user);
-        localStorage.setItem('userIn','true')
         this._route.navigate(['/numbers'])
         return userInfo
       })

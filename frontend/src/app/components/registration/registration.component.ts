@@ -41,6 +41,8 @@ export class RegistrationComponent {
     .subscribe(
       res => {
         localStorage.setItem('token',res.token)
+        localStorage.setItem('userEmail',userRegistrationInfo.email)
+        this._authService.currentUser$.next({email:userRegistrationInfo.email})
         this._router.navigate(['/numbers'])
       },
       err =>{
