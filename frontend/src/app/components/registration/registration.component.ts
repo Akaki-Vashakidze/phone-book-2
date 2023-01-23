@@ -31,7 +31,7 @@ export class RegistrationComponent {
       alert('Passwords must be similar')
     }
 
-    let userRegistrationInfo = {
+    let userRegistrationInfo : any = {
       ...this.userInfo.value,
       password:this.userInfo.value.password1,
       contacts:[]
@@ -41,12 +41,12 @@ export class RegistrationComponent {
     .subscribe(
       res => {
         localStorage.setItem('token',res.token)
-        this._authService.userIsLogged.emit(true)
         this._router.navigate(['/numbers'])
       },
       err =>{
          alert('this email is already taken please restore the password')
         }
     )
+    localStorage.setItem('userEmail',userRegistrationInfo.email)
   }
 }

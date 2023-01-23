@@ -9,22 +9,19 @@ import { Router } from '@angular/router';
 })
 export class ToolbarComponent implements OnInit {
 
-  constructor(private _authService:AuthService, private _router:Router) {}
+  constructor(private _authService:AuthService, private _router:Router) {
+    this.currentUser$ = this._authService.currentUser$;
+  }
  
 
  title = 'frontend';
- userIsLogged :boolean = false;
-
+ currentUser$ : any = null;
 
   ngOnInit(): void {
-    this._authService.userIsLogged.subscribe(item =>{
-    this.userIsLogged = item
-   })
   }
 
   logOut(){
-   this._authService.userIsLogged.emit(false)
-   this._router.navigate([''])
+   this._authService.logOut()
   }
 
 

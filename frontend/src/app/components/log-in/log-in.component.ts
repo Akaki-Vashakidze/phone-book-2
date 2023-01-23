@@ -19,16 +19,12 @@ logInInfo : any= this._formBuilder.group({
 
 logIn() {
   this._authService.loginUser(this.logInInfo.value)
-  .subscribe(
-    res =>  {
-      localStorage.setItem('token',res.token);
-      localStorage.setItem('userEmail',this.logInInfo.value.email)
-      this._authService.userEmail.next(this.logInInfo.value.email)
-      this._authService.userIsLogged.emit(true)
-      this._router.navigate(['/numbers'])
-    },
-    err => console.log(err)
-  )
+   .subscribe({
+    next : (res) => { console.log('res = ' + res.token)},
+    error: () => {console.log('error')}
+   })
+   localStorage.setItem('userEmail',this.logInInfo.value.email)
+   }
+  
+}
 
-}
-}

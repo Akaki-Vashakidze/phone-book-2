@@ -27,12 +27,13 @@ router.post('/addContact',(req,res) => {
          contacts:Data.newContact
        }
      },(err) => (
-       console.log(err)
+       console.log( err)
      ))
 
+     //სამუშაოოოოოოოოოოოო
+setTimeout(() => {
      User.findOne({email:Data.userEmail},(error,user)=>{
       if(error) {
-        console.log(error)
       } else {
         if(user) {
             //sending chosen user
@@ -40,6 +41,8 @@ router.post('/addContact',(req,res) => {
         }
       }
      })
+}, 500);
+    
 })
 
 router.post('/register', (req, res) => {
@@ -49,8 +52,6 @@ router.post('/register', (req, res) => {
             console.log(error)
         } else {
             if (user) {
-                console.log(user)
-                console.log('user email is taken')
                 res.status(401).send('User Email is Taken')
             } else {
                 let user = new User(userData)
@@ -71,18 +72,70 @@ router.post('/register', (req, res) => {
 
 router.post('/numbers', verifyToken, (req, res) => {
     let userData = req.body
-    console.log(req.body)
     User.findOne({ email: userData.email }, (error, user) => {
         if (error) {
             console.log(error)
         } else {
             if (user) {
-                console.log(user)
                 res.send(user.contacts)
             } 
         }
     })
 })
+
+router.post('/deleteNumber',(req,res) => {
+    let Data = req.body
+    User.updateOne({
+      email:Data.email
+     },{
+       $set:{
+         contacts:Data.numbersArray
+       }
+     },(err) => (
+       console.log(err)
+     ))
+
+     setTimeout(() => {
+         User.findOne({email:Data.email},(error,user)=>{
+        if(error) {
+          console.log(error)
+        } else {
+          if(user) {
+              //sending chosen user
+              res.status(201).send(user.contacts)
+          }
+        }
+       })
+     }, 500);
+  })
+
+
+  router.post('/editNumber',(req,res) => {
+    let Data = req.body
+    User.updateOne({
+      email:Data.email
+     },{
+       $set:{
+         contacts:Data.numbersArray
+       }
+     },(err) => (
+       console.log(err)
+     ))
+
+     setTimeout(() => {
+         User.findOne({email:Data.email},(error,user)=>{
+        if(error) {
+          console.log(error)
+        } else {
+          if(user) {
+              //sending chosen user
+              res.status(201).send(user.contacts)
+          }
+        }
+       })
+     }, 500);
+  })
+
 
 router.post('/login', (req, res) => {
     let userData = req.body

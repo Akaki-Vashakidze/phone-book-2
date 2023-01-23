@@ -60,7 +60,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { AddContactComponent } from './components/contacts/add-contact/add-contact.component';
-
+import { EditDialogComponent } from './components/contacts/numbers-table/edit-dialog/edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +71,8 @@ import { AddContactComponent } from './components/contacts/add-contact/add-conta
     NumbersTableComponent,
     ToolbarComponent,
     ContactsComponent,
-    AddContactComponent
+    AddContactComponent,
+    EditDialogComponent
   ],
   imports: [
     BrowserModule,

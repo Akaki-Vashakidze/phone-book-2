@@ -24,14 +24,14 @@ export class AddContactComponent {
 
 
   addContact() {
-    this._authService.userEmail.subscribe(item => {
-      this.email = item
-    })
 
+    this.email = localStorage.getItem('userEmail')
+    
     let userAndNewContact = {
       userEmail: this.email,
       newContact: this.contactInfo.value
     }
+    
     this._numbersService.addContact(userAndNewContact)
       .subscribe(
         res => {
@@ -39,6 +39,6 @@ export class AddContactComponent {
           this._numbersService.numbers.next(res)
         },
         err => console.log(err)
-      )
+      ) 
   }
 }
