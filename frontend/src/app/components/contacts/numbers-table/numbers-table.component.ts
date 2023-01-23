@@ -8,6 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
+import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 
 export interface PeriodicElement {
   name: string;
@@ -32,8 +33,14 @@ export class NumbersTableComponent {
   currentPage :any = 0;
   numbersPerPage : any = 5;
   user : any;
+  editedContact:any;
 
   constructor(public _dialog:MatDialog,private _numbersService: NumbersService, private _router:Router, private _authService:AuthService) {
+
+    this._numbersService.editedContact.subscribe(item => {
+      this.editedContact = item;
+    })
+
     this._numbersService.getNumbers(localStorage.getItem('userEmail')).subscribe(
       item => {
       this.Data = item;
@@ -103,11 +110,32 @@ export class NumbersTableComponent {
     })
   }
 
-  openDialog(){
+ 
+  // this._numbersService.editNumbers(info)
+  // .subscribe(item => {
+  //   console.log(item)
+  //   this._numbersService.numbers.next(item)
+  // })
+
+
+  openDialog(index:any){
+
+  let tableIndex = this.currentPage * this.numbersPerPage + index;
+  let contactInfo = this.Data[tableIndex]
+   let dialogRef =  this._dialog.open(EditDialogComponent, {data:{contact:contactInfo}})
+
+   dialogRef.afterClosed().subscribe(result => {
+    console.log(result)
+    this.edit(index)
+   })
   }
 
-  edit () {
-   this.openDialog()
+  edit (index:any) {
+
+  let tableIndex = this.currentPage * this.numbersPerPage + index;
+  let contactInfo = this.Data[tableIndex]
+   console.log(this.editedContact,contactInfo)
+
   }
 
   @ViewChild(MatSort) sort: MatSort | any;

@@ -74,6 +74,7 @@ import { EditDialogComponent } from './components/contacts/numbers-table/edit-di
     AddContactComponent,
     EditDialogComponent
   ],
+  entryComponents:[EditDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

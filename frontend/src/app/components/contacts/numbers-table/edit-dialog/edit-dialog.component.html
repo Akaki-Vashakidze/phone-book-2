@@ -1,1 +1,33 @@
-<p>edit-dialog works!</p>
+<h2 mat-dialog-title>Edit Number</h2>
+<mat-dialog-content>
+    <div class="container">
+        <form class="form" [formGroup]="editedNumberInfo" >
+      
+          <div class="form-fields">
+            <mat-form-field appearance="fill">
+              <mat-label>{{_data.contact.name}}</mat-label>
+              <input formControlName="name" matInput placeholder="">
+              <mat-hint style="color:red;" *ngIf="editedNumberInfo.get('name')?.touched  && editedNumberInfo.get('name')?.errors?.['required']">
+                name is required
+              </mat-hint> 
+            </mat-form-field>
+          </div>
+         
+          <div class="form-fields">
+            <mat-form-field appearance="fill">
+              <mat-label>{{_data.contact.number}}</mat-label>
+              <input formControlName="number" matInput placeholder="" value="Sushi">
+              <mat-hint style="color:red;" *ngIf="editedNumberInfo.get('number')?.touched  && editedNumberInfo.get('number')?.errors?.['required']">
+                number is required
+              </mat-hint> 
+            </mat-form-field>
+          </div>
+        
+          <div class="form-button" >
+            <button mat-raised-button mat-dialog-close mat-dialog-close="edit"  (click)="getEditedNumber()">edit</button>
+            <button mat-raised-button mat-dialog-close mat-dialog-close="cancel" >cancel</button>
+          </div>
+        </form>
+      </div>
+</mat-dialog-content>
+

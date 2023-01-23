@@ -11,6 +11,7 @@ export class NumbersService {
   private _numberUrl = "http://localhost:4000/api/numbers"
   private _addContact = "http://localhost:4000/api/addContact"
   private _deleteNumber = "http://localhost:4000/api/deleteNumber"
+  private _editNumber = "http://localhost:4000/api/editNumber"
 
   constructor(private _http:HttpClient) { }
 
@@ -31,5 +32,12 @@ export class NumbersService {
   }
 
   numbers = new BehaviorSubject<any>('')
+
+  editNumbers (info:any) {
+  console.log(info)
+  return this._http.post<any>(this._editNumber,info)
+  }
+
+  editedContact = new BehaviorSubject<any>('');
 
 }
