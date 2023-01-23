@@ -10,18 +10,25 @@ import { Router } from '@angular/router';
 export class ToolbarComponent implements OnInit {
 
   constructor(private _authService:AuthService, private _router:Router) {
-    this.currentUser$ = this._authService.currentUser$;
+   
   }
  
 
  title = 'frontend';
- currentUser$ : any = null;
 
-  ngOnInit(): void {
+ userIn : any ;
+
+  ngOnInit(): void { 
+    this.userIn = !!localStorage.getItem('userEmail')
+    this._authService.currentUser$.subscribe(item => {
+      this.userIn = !!localStorage.getItem('userEmail')
+    })
   }
 
   logOut(){
    this._authService.logOut()
+   localStorage.setItem('userEmail','')
+   this._authService.currentUser$.next('')
   }
 
 

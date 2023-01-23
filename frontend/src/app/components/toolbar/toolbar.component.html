@@ -1,10 +1,10 @@
 <mat-toolbar color="primary" class="navbar">
     <div><span routerLink="">Phone Book</span></div>
-    <div *ngIf="{user : currentUser$ | async } as context">
+    <div>
         <span routerLink="">Home</span>
-        <span *ngIf="!context.user" routerLink="/login">Log In</span>
-        <span *ngIf="!context.user" routerLink="/registration">Register</span>
-        <span *ngIf="context.user" routerLink="/numbers">My numbers</span>
-        <span *ngIf="context.user" (click)="logOut()" routerLink="" >Log Out</span>
+        <span *ngIf="!userIn" routerLink="/login">Log In</span>
+        <span *ngIf="!userIn" routerLink="/registration">Register</span>
+        <span *ngIf="userIn" routerLink="/numbers">My numbers</span>
+        <span *ngIf="userIn" (click)="logOut()" routerLink="" >Log Out</span>
     </div>
 </mat-toolbar>

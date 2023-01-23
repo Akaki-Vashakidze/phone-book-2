@@ -87,6 +87,11 @@ export class NumbersTableComponent {
 
     this._authService.currentUser$.subscribe(item => {
       this.user = item
+      console.log(localStorage.getItem('userEmail'))
+      if(localStorage.getItem('userEmail') == '' || !localStorage.getItem('userEmail')) {
+            localStorage.setItem('userEmail',item.email)
+      }
+  
     })
   }
 
@@ -99,7 +104,7 @@ export class NumbersTableComponent {
     let tableIndex = this.currentPage * this.numbersPerPage + index
     this.Data.splice(tableIndex,1)
     let info = {
-      email:this.user.email,
+      email:localStorage.getItem('userEmail'),
       numbersArray:this.Data
     }
 
@@ -125,7 +130,6 @@ export class NumbersTableComponent {
    let dialogRef =  this._dialog.open(EditDialogComponent, {data:{contact:contactInfo}})
 
    dialogRef.afterClosed().subscribe(result => {
-    console.log(result)
     this.edit(index)
    })
   }
@@ -133,9 +137,16 @@ export class NumbersTableComponent {
   edit (index:any) {
 
   let tableIndex = this.currentPage * this.numbersPerPage + index;
-  let contactInfo = this.Data[tableIndex]
-   console.log(this.editedContact,contactInfo)
+  console.log(this.editedContact)
+  this.Data[tableIndex].name = this.editedContact.editedContact.name
+  this.Data[tableIndex].number = this.editedContact.editedContact.number
+  this.editedContact.numbersArray = this.Data
 
+   this._numbersService.editNumbers(this.editedContact)
+   .subscribe(
+    res => console.log(res),
+    err => {console.log(err)}
+   )
   }
 
   @ViewChild(MatSort) sort: MatSort | any;

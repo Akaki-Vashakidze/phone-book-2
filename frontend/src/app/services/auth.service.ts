@@ -32,12 +32,9 @@ export class AuthService {
 
   currentUser$ = new BehaviorSubject<any>('');
 
-
-
   logOut() {
     localStorage.setItem('token','')
     this.currentUser$.next(null)
-    localStorage.setItem('userIn','false')
     this._route.navigate([''])
   }
 

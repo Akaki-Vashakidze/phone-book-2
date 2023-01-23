@@ -21,7 +21,7 @@ editedNumberInfo = this._formBuilder.group({
 getEditedNumber() {
   let info = {
     email:localStorage.getItem('userEmail'),
-    numbersArray:this.editedNumberInfo.value
+    editedContact:this.editedNumberInfo.value
   }
   
 this._numbersService.editedContact.next(info)
