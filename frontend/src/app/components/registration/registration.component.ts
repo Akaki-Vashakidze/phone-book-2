@@ -15,11 +15,11 @@ export class RegistrationComponent {
   userInfo = this._formBuilder.group({
     firstName: ['', Validators.required],
     lastName:['',Validators.required],
-    email:['',Validators.required],
-    mobile:['',Validators.required],
+    email:['',[Validators.required,Validators.email]],
+    mobile:['',[Validators.required,Validators.minLength(9)]],
     gender:['',Validators.required],
-    password1:['',Validators.required],
-    password2:['',Validators.required]
+    password1:['',[Validators.required,Validators.minLength(3)]],
+    password2:['',[Validators.required,Validators.minLength(3)]]
   })
 
   saveInfo () {

@@ -26,6 +26,9 @@
           <mat-hint style="color:red;" *ngIf="userInfo.get('mobile')?.touched  && userInfo.get('mobile')?.errors?.['required']">
             Mobile number is required
           </mat-hint> 
+          <mat-hint style="color:red;" *ngIf="userInfo.get('mobile')?.touched  && userInfo.get('mobile')?.errors?.['minlength']">
+            write your number correctly (e.x 599123456)
+          </mat-hint> 
         </mat-form-field>
       </div>
       <div class="form-fields">
@@ -34,6 +37,9 @@
           <input formControlName="email" matInput placeholder="">
           <mat-hint style="color:red;" *ngIf="userInfo.get('email')?.touched  && userInfo.get('email')?.errors?.['required']">
             Email is required
+          </mat-hint> 
+          <mat-hint style="color:red;" *ngIf="userInfo.get('email')?.touched  && userInfo.get('email')?.errors?.['email']">
+            It seems like your email is written uncorrectly
           </mat-hint> 
         </mat-form-field>
       </div>
@@ -45,6 +51,9 @@
           <mat-hint style="color:red;" *ngIf="userInfo.get('password1')?.touched  && userInfo.get('password1')?.errors?.['required']">
             Password is required
           </mat-hint> 
+          <mat-hint style="color:red;" *ngIf="userInfo.get('password1')?.touched  && userInfo.get('password1')?.errors?.['minlength']">
+            Password must be at least 3 words
+          </mat-hint> 
         </mat-form-field>
       </div>
       <div class="form-fields">
@@ -53,6 +62,9 @@
           <input type="password" formControlName="password2" matInput placeholder="">
           <mat-hint style="color:red;" *ngIf="userInfo.get('password2')?.touched  && userInfo.get('password2')?.errors?.['required']">
             Password is required
+          </mat-hint> 
+          <mat-hint style="color:red;" *ngIf="userInfo.get('password2')?.touched  && userInfo.get('password2')?.errors?.['minlength']">
+            Password must be at least 3 words
           </mat-hint> 
         </mat-form-field>
       </div>

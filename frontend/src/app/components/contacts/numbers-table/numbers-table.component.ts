@@ -89,7 +89,12 @@ export class NumbersTableComponent {
       this.user = item
       console.log(localStorage.getItem('userEmail'))
       if(localStorage.getItem('userEmail') == '' || !localStorage.getItem('userEmail')) {
+        if(item.email) {
             localStorage.setItem('userEmail',item.email)
+        } else {
+          localStorage.setItem('userEmail','')
+        }
+          
       }
   
     })
