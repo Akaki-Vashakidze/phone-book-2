@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken')
 const router = express.Router()
 const User = require('../models/user')
 const mongoose = require('mongoose')
+const bcrypt = require("bcrypt")
+const saltRounds = 10
 
 const db = 'mongodb+srv://akak1:7p0DJkDvPtMdDQuQ@cluster0.fcpniir.mongodb.net/phone-book-2?retryWrites=true&w=majority'
 
@@ -47,6 +49,20 @@ setTimeout(() => {
 
 router.post('/register', (req, res) => {
     let userData = req.body
+
+    bcrypt
+    .genSalt(saltRounds)
+    .then(salt => {
+      console.log('Salt: ', salt)
+      return bcrypt.hash(userData.password, salt)
+    })
+    .then(hash => {
+      console.log('Hash: ', hash)
+      userData.password = hash;
+    })
+    .catch(err => console.error(err.message))
+
+
     User.findOne({ email: userData.email }, (error, user) => {
         if (error) {
             console.log(error)
@@ -136,6 +152,10 @@ router.post('/deleteNumber',(req,res) => {
      }, 500);
   })
 
+  function compareHush(password,hashedPassword) {
+    return bcrypt.compareSync(password,hashedPassword)
+  }
+
 
 router.post('/login', (req, res) => {
     let userData = req.body
@@ -146,12 +166,14 @@ router.post('/login', (req, res) => {
             if (!user) {
                 res.status(401).send("Invalid Email")
             } else
-                if (user.password !== userData.password) {
-                    res.status(401).send('Invalid password')
+                 console.log(userData.password,user.password)
+                 console.log('hash console' + compareHush(userData.password,user.password))
+                if (compareHush(userData.password,user.password)) {
+                  let payload = { subject: user._id }
+                  let token = jwt.sign(payload, 'secretKey')
+                  res.status(200).send({ token })
                 } else {
-                    let payload = { subject: user._id }
-                    let token = jwt.sign(payload, 'secretKey')
-                    res.status(200).send({ token })
+                  res.status(401).send('Invalid password')
                 }
         }
     })
