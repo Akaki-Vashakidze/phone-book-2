@@ -9,7 +9,7 @@ const userSchema = new Schema({
     mobile:Number,
     gender:String,
     password:String,
-    contacts:Array
+    contacts:[Object]
 })
 
 module.exports = mongoose.model('user',userSchema)

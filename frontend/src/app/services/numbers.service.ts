@@ -8,10 +8,10 @@ import { BehaviorSubject } from 'rxjs';
 export class NumbersService {
    
 
-  private _numberUrl = "http://localhost:4000/api/numbers"
-  private _addContact = "http://localhost:4000/api/addContact"
-  private _deleteNumber = "http://localhost:4000/api/deleteNumber"
-  private _editNumber = "http://localhost:4000/api/editNumber"
+  private _numberUrl = "/api/numbers"
+  private _addContact = "/api/addContact"
+  private _deleteNumber = "/api/deleteNumber"
+  private _editNumber = "/api/editNumber"
 
   constructor(private _http:HttpClient) { }
 
