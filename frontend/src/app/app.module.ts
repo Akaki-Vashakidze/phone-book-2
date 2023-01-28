@@ -61,6 +61,9 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { AddContactComponent } from './components/contacts/add-contact/add-contact.component';
 import { EditDialogComponent } from './components/contacts/numbers-table/edit-dialog/edit-dialog.component';
+import { SearchComponent } from './components/contacts/search/search.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -72,10 +75,12 @@ import { EditDialogComponent } from './components/contacts/numbers-table/edit-di
     ToolbarComponent,
     ContactsComponent,
     AddContactComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    SearchComponent
   ],
   entryComponents:[EditDialogComponent],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,

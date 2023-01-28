@@ -36,7 +36,7 @@ router.post('/addContact', async (req, res) => {
 router.post('/deleteNumber', async (req, res) => {
   try {
     let Data = req.body
-    await User.updateOne({ email: Data.email }, { $set: { contacts: Data.numbersArray } })
+    await User.updateOne({ email: Data.email }, { $pull: { contacts: {name:Data.contact.name,number:Data.contact.number} } })
     const user = await User.findOne({ email: Data.email })
     res.status(201).send(user.contacts)
   }

@@ -1,0 +1,7 @@
+<div class="form-field">
+    <mat-form-field appearance="fill">
+      <mat-label>Search:</mat-label>
+      <input matInput placeholder="" [ngModel]="mymodel" (keydown)="stopTimer()" (ngModelChange)="valuechange($event)" >
+    </mat-form-field>
+    <div>{{mymodel}}</div>
+  </div>
