@@ -11,7 +11,7 @@ import { NumbersService } from 'src/app/services/numbers.service';
 
 export class EditDialogComponent {
 constructor(@Inject(MAT_DIALOG_DATA) public _data:any,private _formBuilder: FormBuilder,private _numbersService:NumbersService) {
-  console.log(_data)
+
 }
 editedNumberInfo = this._formBuilder.group({
   name:['',Validators.required],

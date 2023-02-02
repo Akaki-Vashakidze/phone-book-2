@@ -10,16 +10,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-/**
- * @title Basic use of `<table mat-table>`
- */
 
 @Component({
   selector: 'app-numbers-table',
@@ -87,7 +77,6 @@ export class NumbersTableComponent {
 
     this._authService.currentUser$.subscribe(item => {
       this.user = item
-      console.log(localStorage.getItem('userEmail'))
       if (localStorage.getItem('userEmail') == '' || !localStorage.getItem('userEmail')) {
         if (item.email) {
           localStorage.setItem('userEmail', item.email)
@@ -106,8 +95,9 @@ export class NumbersTableComponent {
   }
 
   delete(index: any) {
+    console.log(this.dataSource.filteredData)
     let tableIndex = this.currentPage * this.numbersPerPage + index
-    let contact = this.Data[tableIndex]
+    let contact = this.dataSource.filteredData[tableIndex]
     let info = {
       email: localStorage.getItem('userEmail'),
       contact: contact
@@ -115,7 +105,6 @@ export class NumbersTableComponent {
 
     this._numbersService.deleteNumber(info)
       .subscribe(item => {
-        console.log(item)
         this._numbersService.numbers.next(item)
       })
   }
@@ -139,12 +128,16 @@ export class NumbersTableComponent {
     })
   }
 
+  applyFilter(filterValue:any) {
+  this.dataSource.filter = filterValue.target.value.trim().toLowerCase()
+  }
+
   edit(index: any) {
 
     let tableIndex = this.currentPage * this.numbersPerPage + index;
     console.log(this.editedContact)
-    this.Data[tableIndex].name = this.editedContact.editedContact.name
-    this.Data[tableIndex].number = this.editedContact.editedContact.number
+   this.dataSource.filteredData[tableIndex].name = this.editedContact.editedContact.name
+   this.dataSource.filteredData[tableIndex].number = this.editedContact.editedContact.number
     this.editedContact.numbersArray = this.Data
 
     this._numbersService.editNumbers(this.editedContact)

@@ -35,7 +35,6 @@ export class AddContactComponent {
     this._numbersService.addContact(userAndNewContact)
       .subscribe(
         res => {
-          console.log(res)
           this._numbersService.numbers.next(res)
         },
         err => console.log(err)

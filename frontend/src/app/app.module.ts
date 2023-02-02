@@ -61,7 +61,6 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { AddContactComponent } from './components/contacts/add-contact/add-contact.component';
 import { EditDialogComponent } from './components/contacts/numbers-table/edit-dialog/edit-dialog.component';
-import { SearchComponent } from './components/contacts/search/search.component';
 import { FormsModule } from '@angular/forms';
 
 
@@ -75,8 +74,7 @@ import { FormsModule } from '@angular/forms';
     ToolbarComponent,
     ContactsComponent,
     AddContactComponent,
-    EditDialogComponent,
-    SearchComponent
+    EditDialogComponent
   ],
   entryComponents:[EditDialogComponent],
   imports: [

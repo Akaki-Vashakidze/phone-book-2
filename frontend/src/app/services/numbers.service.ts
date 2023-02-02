@@ -13,6 +13,11 @@ export class NumbersService {
   private _deleteNumber = "/api/deleteNumber"
   private _editNumber = "/api/editNumber"
 
+  numbers = new BehaviorSubject<any>('')
+  editedContact = new BehaviorSubject<any>('');
+  searchingNumbers = new BehaviorSubject<any>(false);
+
+
   constructor(private _http:HttpClient) { }
 
   getNumbers (userEmail : any) {
@@ -27,17 +32,13 @@ export class NumbersService {
   }
 
   deleteNumber (info :any) {
-    console.log(info)
     return this._http.post<any>(this._deleteNumber,info)
   }
 
-  numbers = new BehaviorSubject<any>('')
 
   editNumbers (info:any) {
-  console.log(info)
   return this._http.post<any>(this._editNumber,info)
   }
 
-  editedContact = new BehaviorSubject<any>('');
 
 }
